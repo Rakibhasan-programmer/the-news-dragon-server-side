@@ -25,17 +25,19 @@ app.get("/news", (req, res) => {
 // news by id
 app.get("/news/:id", (req, res) => {
   const id = req.params.id;
-  const selectedNews = news.find((n) => n._id === id);
+  const selectedNews = news.find((n) => n._id == id);
   res.send(selectedNews);
 });
 
 // news by category
 app.get("/categories/:id", (req, res) => {
-  const categoryId = req.params.id;
+  const categoryId = parseInt(req.params.id);
   if (categoryId == 0) {
     res.send(news);
   } else {
-    const categoryNews = news.filter((n) => n.category_id === categoryId);
+    const categoryNews = news.filter(
+      (n) => parseInt(n.category_id) === categoryId
+    );
     res.send(categoryNews);
   }
 });
